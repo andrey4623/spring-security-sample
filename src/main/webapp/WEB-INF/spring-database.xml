@@ -23,7 +23,6 @@
         <property name="mappingResources">
             <list>
                 <value>orm/Users.hbm.xml</value>
-                <value>orm/UserRoles.hbm.xml</value>
             </list>
         </property>
         <property name="hibernateProperties">

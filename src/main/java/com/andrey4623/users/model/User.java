@@ -9,7 +9,6 @@ public class User{
     private String username;
     private String password;
     private String name;
-    private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
     public User() {
     }
@@ -19,14 +18,6 @@ public class User{
         this.username = username;
         this.password = password;
         this.name = name;
-    }
-
-    public User(Integer id, String username, String password, String name, Set<UserRole> userRole) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.userRole = userRole;
     }
 
     public Integer getId() {
@@ -51,14 +42,6 @@ public class User{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<UserRole> getUserRole() {
-        return this.userRole;
-    }
-
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
     }
 
     public String getName() {
