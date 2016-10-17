@@ -8,21 +8,24 @@ public class User{
     private Integer id;
     private String username;
     private String password;
+    private String name;
     private Set<UserRole> userRole = new HashSet<UserRole>(0);
 
     public User() {
     }
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id, String username, String password, String name) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.name = name;
     }
 
-    public User(Integer id, String username, String password, Set<UserRole> userRole) {
+    public User(Integer id, String username, String password, String name, Set<UserRole> userRole) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.name = name;
         this.userRole = userRole;
     }
 
@@ -58,4 +61,11 @@ public class User{
         this.userRole = userRole;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

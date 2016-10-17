@@ -1,6 +1,7 @@
 package com.andrey4623.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import com.andrey4623.users.service.ExtendedUser;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
@@ -20,11 +21,19 @@ public class MainController {
     public ModelAndView defaultPage() {
 
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security + Hibernate Example");
-        model.addObject("message", "This is default page!");
+        model.addObject("title", "Spring Security Sample");
+
+        final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() &&
+                !(auth instanceof AnonymousAuthenticationToken)) {
+             ExtendedUser user = (ExtendedUser) auth.getPrincipal();
+            // User is authenticated.
+            final String username = user.getName();
+            model.addObject("name", username);
+        }
+
         model.setViewName("hello");
         return model;
-
     }
 
     @RequestMapping(value = "/admin**", method = RequestMethod.GET)
@@ -90,7 +99,5 @@ public class MainController {
 
         model.setViewName("403");
         return model;
-
     }
-
 }

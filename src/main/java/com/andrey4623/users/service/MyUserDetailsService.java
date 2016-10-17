@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import com.andrey4623.users.dao.UserDao;
 import com.andrey4623.users.model.UserRole;
 
@@ -46,7 +45,7 @@ public class MyUserDetailsService implements UserDetailsService {
     // Converts com.andrey4623.users.model.User user to
     // org.springframework.security.core.userdetails.User
     private User buildUserForAuthentication(com.andrey4623.users.model.User user, List<GrantedAuthority> authorities) {
-        return new User(user.getUsername(), user.getPassword(), true, true, true, true, authorities);
+        return new ExtendedUser(user.getId(), user.getUsername(), user.getName(), user.getPassword(), true, true, true, true, authorities);
     }
 
     private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {

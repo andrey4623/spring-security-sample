@@ -3,11 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <body>
-	<h1>Title : ${title}</h1>
-	<h1>Message : ${message}</h1>
+	<h1>${title}</h1>
+    <h1>${message}</h1>
 
 	<sec:authorize access="isAuthenticated()">
 		<!-- For login user -->
+
+        <h2>Welcome, ${name}</h2>
+        <h2><a href="javascript:formSubmit()"> Logout</a></h2>
 
 		<c:url value="/logout" var="logoutUrl" />
 		<form id="logout" action="${logoutUrl}" method="post" >
@@ -24,14 +27,12 @@
 			}
 		</script>
 
-		<c:if test="${pageContext.request.userPrincipal.name != null}">
-			<h2>
-				User : ${pageContext.request.userPrincipal.name} | <a
-					href="javascript:formSubmit()"> Logout</a>
-			</h2>
-		</c:if>
 
 
+	</sec:authorize>
+	<sec:authorize access="isAnonymous()">
+		<!-- For anonymous user -->
+			<h2>You are not logged in. Please <a href="login">sign in</a>.</h2>
 	</sec:authorize>
 </body>
 </html>
