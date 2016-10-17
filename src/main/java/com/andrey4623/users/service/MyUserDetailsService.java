@@ -12,10 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.andrey4623.users.dao.UserDao;
-import com.andrey4623.users.model.UserRole;
 
 public class MyUserDetailsService implements UserDetailsService {
 
+    private static final String ROLE_USER = "ROLE_USER";
     private UserDao userDao;
     private static final Logger logger = Logger.getLogger(MyUserDetailsService.class);
 
@@ -36,7 +36,7 @@ public class MyUserDetailsService implements UserDetailsService {
         });*/
 
         com.andrey4623.users.model.User user = userDao.findByUserName(username);
-        List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRole());
+        List<GrantedAuthority> authorities = buildUserAuthority();
 
         return buildUserForAuthentication(user, authorities);
 
@@ -48,14 +48,11 @@ public class MyUserDetailsService implements UserDetailsService {
         return new ExtendedUser(user.getId(), user.getUsername(), user.getName(), user.getPassword(), true, true, true, true, authorities);
     }
 
-    private List<GrantedAuthority> buildUserAuthority(Set<UserRole> userRoles) {
+    private List<GrantedAuthority> buildUserAuthority() {
 
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
-        // Build user's authorities
-        for (UserRole userRole : userRoles) {
-            setAuths.add(new SimpleGrantedAuthority(userRole.getRole()));
-        }
+        setAuths.add(new SimpleGrantedAuthority(ROLE_USER));
 
         List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
 
