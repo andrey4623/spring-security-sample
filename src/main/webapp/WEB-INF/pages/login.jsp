@@ -39,7 +39,7 @@
 
 	<div id="login-box">
 
-		<h3>Login with Username and Password</h3>
+		<h3>Вход в систему</h3>
 
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
@@ -53,16 +53,16 @@
 
 			<table>
 				<tr>
-					<td>User:</td>
+					<td>Логин:</td>
 					<td><input type='text' name='username'></td>
 				</tr>
 				<tr>
-					<td>Password:</td>
+					<td>Пароль:</td>
 					<td><input type='password' name='password' /></td>
 				</tr>
 				<tr>
 					<td colspan='2'><input name="submit" type="submit"
-						value="submit" /></td>
+						value="Вход" /></td>
 				</tr>
 			</table>
 

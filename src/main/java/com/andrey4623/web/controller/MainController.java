@@ -17,11 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
+    private static final String INVALID_USERNAME_AND_PASSWORD = "Неправильное имя пользователя и/или пароль.";
+    private static final String LOGGED_OUT = "Вы вышли из системы.";
+    private static final String APPLICATION_TITLE = "Демонстрация Spring Security + Hibernate";
+
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
     public ModelAndView defaultPage() {
 
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security Sample");
+        model.addObject("title", APPLICATION_TITLE);
 
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated() &&
@@ -40,7 +44,7 @@ public class MainController {
     public ModelAndView adminPage() {
 
         ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security + Hibernate Example");
+        model.addObject("title", APPLICATION_TITLE);
         model.addObject("message", "This page is for ROLE_ADMIN only!");
         model.setViewName("admin");
 
@@ -53,12 +57,13 @@ public class MainController {
             @RequestParam(value = "logout", required = false) String logout, HttpServletRequest request) {
 
         ModelAndView model = new ModelAndView();
+
         if (error != null) {
             model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
         }
 
         if (logout != null) {
-            model.addObject("msg", "You've been logged out successfully.");
+            model.addObject("msg", LOGGED_OUT);
         }
         model.setViewName("login");
 
@@ -73,11 +78,11 @@ public class MainController {
 
         String error = "";
         if (exception instanceof BadCredentialsException) {
-            error = "Invalid username and password!";
+            error = INVALID_USERNAME_AND_PASSWORD;
         } else if (exception instanceof LockedException) {
             error = exception.getMessage();
         } else {
-            error = "Invalid username and password!";
+            error = INVALID_USERNAME_AND_PASSWORD;
         }
 
         return error;

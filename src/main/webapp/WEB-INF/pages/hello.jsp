@@ -9,8 +9,8 @@
 	<sec:authorize access="isAuthenticated()">
 		<!-- For login user -->
 
-        <h2>Welcome, ${name}</h2>
-        <h2><a href="javascript:formSubmit()"> Logout</a></h2>
+        <h2>Добро пожаловать, ${name}</h2>
+        <h2><a href="javascript:formSubmit()"> Выход</a></h2>
 
 		<c:url value="/logout" var="logoutUrl" />
 		<form id="logout" action="${logoutUrl}" method="post" >
@@ -32,7 +32,7 @@
 	</sec:authorize>
 	<sec:authorize access="isAnonymous()">
 		<!-- For anonymous user -->
-			<h2>You are not logged in. Please <a href="login">sign in</a>.</h2>
+			<h2>Вы не вошли в систему. <a href="login">Вход</a></h2>
 	</sec:authorize>
 </body>
 </html>
