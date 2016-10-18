@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andrey4623/spring-security-sample.svg?branch=master)](https://travis-ci.org/andrey4623/spring-security-sample)
+
 # Spring Security Sample
 
 This is just a simple project that shows how to use Spring MVC + Spring Security + Hibernate.
